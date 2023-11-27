@@ -1,0 +1,1 @@
+export { Col as AppColumn } from 'antd';

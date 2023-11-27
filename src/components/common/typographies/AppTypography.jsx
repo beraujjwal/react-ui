@@ -1,0 +1,1 @@
+export { Typography as AppTypography } from 'antd';

@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ConfigProvider } from 'antd';
+import { HelmetProvider } from 'react-helmet-async';
+import deDe from 'antd/lib/locale/de_DE';
+import enUS from 'antd/lib/locale/en_US';
+
+import { AppRouter } from './routers/AppRouter';
+import { themeObject } from './styles/themes/themeVariables';
+import GlobalStyle from './styles/GlobalStyle';
+import { useAppSelector } from './hooks/reduxHooks';
 
 function App() {
+  const language = 'en';
+  const theme = useAppSelector((state) => state?.theme?.theme);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <meta name="theme-color" content={themeObject[theme].primary} />
+      <GlobalStyle />
+      <HelmetProvider>
+        <ConfigProvider locale={language === 'en' ? enUS : deDe}>
+          <AppRouter />
+        </ConfigProvider>
+      </HelmetProvider>
+    </>
   );
 }
 
